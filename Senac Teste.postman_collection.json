@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "26a03332-8521-48f1-b581-ad8c6f9687ab",
+		"_postman_id": "34ad3121-5f3e-4e41-8310-a27d052e5c53",
 		"name": "Senac Teste",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1172,6 +1172,50 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n  \"id\": 12346,\r\n  \"estadoId\": 4,\r\n  \"nome\": \"CR - ES NDC Curso com Encerramento por Oferta\",\r\n  \"tituloDeOrigem\": null,\r\n  \"justificativa\": \"\",\r\n  \"cargaHoraria\": 10,\r\n  \"eixoTecnologicoId\": 1,\r\n  \"segmentoId\": 8,\r\n  \"modalidadeId\": 3,\r\n  \"tipoDeAcaoId\": 14,\r\n  \"situacao\": true,\r\n  \"prefixoDaCertificacaoId\": 1,\r\n  \"solicitarCbo\": false,\r\n\r\n  \"recursoFinanceiroIds\": [\r\n    1,\r\n    2,\r\n    3\r\n  ],\r\n  \"ocupacaoCboIds\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Servidor}}/planocursoserver/api/Titulo",
+							"host": [
+								"{{Servidor}}"
+							],
+							"path": [
+								"planocursoserver",
+								"api",
+								"Titulo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Titulo DN - CR",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"nome\": \"CR - Nacional - ES NDC Curso com Encerramento por Oferta\",\r\n  \"tituloDeOrigem\": 1,\r\n  \"justificativa\": \"\",\r\n  \"cargaHoraria\": 10,\r\n  \"eixoTecnologicoId\": 1,\r\n  \"segmentoId\": 8,\r\n  \"modalidadeId\": 3,\r\n  \"tipoDeAcaoId\": 14,\r\n  \"situacao\": true,\r\n  \"prefixoDaCertificacaoId\": 1,\r\n  \"solicitarCbo\": false,\r\n  \"estadoId\": 3,\r\n  \"recursoFinanceiroIds\": [\r\n    1,\r\n    2,\r\n    3\r\n  ],\r\n  \"ocupacaoCboIds\": []\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
