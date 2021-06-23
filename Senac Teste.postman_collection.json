@@ -1,12 +1,15 @@
 {
+	"variables": [],
 	"info": {
-		"_postman_id": "34ad3121-5f3e-4e41-8310-a27d052e5c53",
-		"name": "Senac Teste",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"name": "Senac Teste - Diego",
+		"_postman_id": "dd3167e6-9ed0-4152-b512-ed0fea3421bc",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Login",
+			"description": "",
 			"item": [
 				{
 					"name": "Login",
@@ -14,6 +17,7 @@
 						{
 							"listen": "test",
 							"script": {
+								"type": "text/javascript",
 								"exec": [
 									"function jwt_decode(token) {\r",
 									"    var parts = token.split('.');\r",
@@ -50,12 +54,12 @@
 									"}\r",
 									"\r",
 									"registrarLogin();"
-								],
-								"type": "text/javascript"
+								]
 							}
 						}
 					],
 					"request": {
+						"url": "{{ServidorSeguranca}}/api/logins",
 						"method": "POST",
 						"header": [
 							{
@@ -71,23 +75,9 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n//AMBIENTE DEV\r\n{\r\n    \"email\": \"diego.callili@db1.com.br\",\r\n    \"senha\": \"12345@Sig\",\r\n    \"tipoLogin\": \"01\",\r\n    \"unidadeOperativaId\": null,\r\n    \"_email\": \"diego.callili@db1.com.br\",\r\n    \"_senha\": \"12345@Sig\",\r\n    \"_unidadeOperativaId\": null\r\n}\r\n\r\n/*\r\n//LOCALHOST\r\n{\r\n    \"email\": \"diego.callili@db1.com.br\",\r\n    \"senha\": \"12345@Sig\",\r\n    \"tipoLogin\": \"01\",\r\n    \"unidadeOperativaId\": null,\r\n    \"_email\": \"diego.callili@db1.com.br\",\r\n    \"_senha\": \"12345@Sig\",\r\n    \"_unidadeOperativaId\": null\r\n\r\n}\r\n*/",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "\r\n//AMBIENTE DEV\r\n{\r\n    \"email\": \"diego.callili@db1.com.br\",\r\n    \"senha\": \"12345@Sig\",\r\n    \"tipoLogin\": \"01\",\r\n    \"unidadeOperativaId\": null,\r\n    \"_email\": \"diego.callili@db1.com.br\",\r\n    \"_senha\": \"12345@Sig\",\r\n    \"_unidadeOperativaId\": null\r\n}\r\n\r\n/*\r\n//LOCALHOST\r\n{\r\n    \"email\": \"diego.callili@db1.com.br\",\r\n    \"senha\": \"12345@Sig\",\r\n    \"tipoLogin\": \"01\",\r\n    \"unidadeOperativaId\": null,\r\n    \"_email\": \"diego.callili@db1.com.br\",\r\n    \"_senha\": \"12345@Sig\",\r\n    \"_unidadeOperativaId\": null\r\n\r\n}\r\n*/"
 						},
-						"url": {
-							"raw": "{{ServidorSeguranca}}/api/logins",
-							"host": [
-								"{{ServidorSeguranca}}"
-							],
-							"path": [
-								"api",
-								"logins"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
@@ -97,16 +87,17 @@
 						{
 							"listen": "test",
 							"script": {
+								"type": "text/javascript",
 								"exec": [
 									"pm.globals.set(\"Token\", \"\");\r",
 									"pm.globals.set(\"Usuario\", \"\");\r",
 									"pm.globals.set(\"UsuarioHash\", \"\");"
-								],
-								"type": "text/javascript"
+								]
 							}
 						}
 					],
 					"request": {
+						"url": "{{ServidorSeguranca}}/api/registrarLogoffExplicito/{{UsuarioHash}}",
 						"method": "POST",
 						"header": [
 							{
@@ -122,24 +113,9 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
-						"url": {
-							"raw": "{{ServidorSeguranca}}/api/registrarLogoffExplicito/{{UsuarioHash}}",
-							"host": [
-								"{{ServidorSeguranca}}"
-							],
-							"path": [
-								"api",
-								"registrarLogoffExplicito",
-								"{{UsuarioHash}}"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
@@ -147,17 +123,9 @@
 					"name": "Trocar Regional",
 					"event": [
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
 							"listen": "prerequest",
 							"script": {
+								"type": "text/javascript",
 								"exec": [
 									"const uoDestino = \"26\";\r",
 									"const urlRequestLogOff = pm.globals.get('ServidorSeguranca') + '/api/registrarLogoffTrocaUnidade/' + pm.globals.get('UsuarioHash');\r",
@@ -224,22 +192,12 @@
 									"executarLogOff();\r",
 									"\r",
 									""
-								],
-								"type": "text/javascript"
+								]
 							}
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{ServidorSeguranca}}/api/logins/registrarLogin",
 						"method": "POST",
 						"header": [
 							{
@@ -261,60 +219,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
-						"url": {
-							"raw": "{{ServidorSeguranca}}/api/logins/registrarLogin",
-							"host": [
-								"{{ServidorSeguranca}}"
-							],
-							"path": [
-								"api",
-								"logins",
-								"registrarLogin"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Trocar Regional - Teste isolado",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{ServidorSeguranca}}/api/logins/trocarUnidadeOperativa",
 						"method": "POST",
 						"header": [
 							{
@@ -336,24 +250,9 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "26",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "26"
 						},
-						"url": {
-							"raw": "{{ServidorSeguranca}}/api/logins/trocarUnidadeOperativa",
-							"host": [
-								"{{ServidorSeguranca}}"
-							],
-							"path": [
-								"api",
-								"logins",
-								"trocarUnidadeOperativa"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				}
@@ -361,23 +260,12 @@
 		},
 		{
 			"name": "Modelo Assinatura",
+			"description": "",
 			"item": [
 				{
 					"name": "Teste lista registros",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/admserver/api/ModeloDeAssinatura/35",
 						"method": "GET",
 						"header": [
 							{
@@ -388,41 +276,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
-						"url": {
-							"raw": "{{Servidor}}/admserver/api/ModeloDeAssinatura/35",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"admserver",
-								"api",
-								"ModeloDeAssinatura",
-								"35"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Teste altera dados",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/admserver/api/ModeloDeAssinatura/",
 						"method": "POST",
 						"header": [
 							{
@@ -433,41 +296,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 35,\r\n    \"nome\": \"A_TC_Alterado acertei\",\r\n    \"modeloPadrao\": \"false\",\r\n    \"estadoDoModeloDeAssinatura\": 1,\r\n    \"situacao\": true,\r\n    \"tiposDeDocumentoIds\": [\r\n        87\r\n    ]\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n    \"id\": 35,\r\n    \"nome\": \"A_TC_Alterado acertei\",\r\n    \"modeloPadrao\": \"false\",\r\n    \"estadoDoModeloDeAssinatura\": 1,\r\n    \"situacao\": true,\r\n    \"tiposDeDocumentoIds\": [\r\n        87\r\n    ]\r\n}\r\n"
 						},
-						"url": {
-							"raw": "{{Servidor}}/admserver/api/ModeloDeAssinatura/",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"admserver",
-								"api",
-								"ModeloDeAssinatura",
-								""
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Teste Reabrir",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/admserver/api/ModeloDeAssinatura/ReabrirModelo/",
 						"method": "PUT",
 						"header": [
 							{
@@ -478,42 +316,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 35,\r\n    \"situacao\": true,\r\n    \"estadoDoModeloDeAssinatura\": 2,\r\n    \"nome\": \"A_TC_Alterado acertei\",\r\n    \"modeloPadrao\": false,\r\n    \"assinaturas\": [\r\n        {\r\n            \"id\": 65,\r\n            \"situacao\": true,\r\n            \"modeloDeAssinaturaId\": 35,\r\n            \"tipoDePosicao\": 2,\r\n            \"aluno\": false,\r\n            \"vinculoContratualDoColaboradorId\": 9,\r\n            \"nomeVinculo\": \"Gerente  Unidade Operativa\",\r\n            \"assinaturaDigitalizada\": true,\r\n            \"nomeAbreviado\": true,\r\n            \"portaria\": true,\r\n            \"vinculo\": {\r\n                \"id\": 9,\r\n                \"nome\": \"Gerente  Unidade Operativa\",\r\n                \"permiteAcumuloDeFuncao\": false,\r\n                \"situacao\": true,\r\n                \"permiteAssinatura\": true\r\n            },\r\n            \"regionalId\": null\r\n        }\r\n    ],\r\n    \"assinaturasAtivas\": 1,\r\n    \"tiposDeDocumentos\": [\r\n        {\r\n            \"modeloDeAssinaturaId\": 0,\r\n            \"tipoDeDocumentoId\": 0,\r\n            \"tipoDeDocumento\": {\r\n                \"id\": 87,\r\n                \"descricao\": \"Declaração de Matrícula\",\r\n                \"modeloDeFormulario\": false,\r\n                \"tipoDoNivelDeEscolaridade\": false,\r\n                \"tipoDeCpf\": false,\r\n                \"tipoDeRg\": false,\r\n                \"naoPermiteNumeroDoDocumento\": false,\r\n                \"grupo\": 0,\r\n                \"situacao\": false,\r\n                \"categoriaDoTipoDeDocumentoId\": null,\r\n                \"categoriaDoTipoDeDocumento\": null,\r\n                \"posicoesDasAssinaturasDoTipoDeDocumento\": null,\r\n                \"utilizacoesDosDocumentos\": null,\r\n                \"utilizacoesDosDocumentosIds\": null\r\n            },\r\n            \"modeloDeAssinatura\": null\r\n        }\r\n    ],\r\n    \"nomeFormatado\": \"A_TC_Alterado acertei\",\r\n    \"regionalId\": 1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n    \"id\": 35,\r\n    \"situacao\": true,\r\n    \"estadoDoModeloDeAssinatura\": 2,\r\n    \"nome\": \"A_TC_Alterado acertei\",\r\n    \"modeloPadrao\": false,\r\n    \"assinaturas\": [\r\n        {\r\n            \"id\": 65,\r\n            \"situacao\": true,\r\n            \"modeloDeAssinaturaId\": 35,\r\n            \"tipoDePosicao\": 2,\r\n            \"aluno\": false,\r\n            \"vinculoContratualDoColaboradorId\": 9,\r\n            \"nomeVinculo\": \"Gerente  Unidade Operativa\",\r\n            \"assinaturaDigitalizada\": true,\r\n            \"nomeAbreviado\": true,\r\n            \"portaria\": true,\r\n            \"vinculo\": {\r\n                \"id\": 9,\r\n                \"nome\": \"Gerente  Unidade Operativa\",\r\n                \"permiteAcumuloDeFuncao\": false,\r\n                \"situacao\": true,\r\n                \"permiteAssinatura\": true\r\n            },\r\n            \"regionalId\": null\r\n        }\r\n    ],\r\n    \"assinaturasAtivas\": 1,\r\n    \"tiposDeDocumentos\": [\r\n        {\r\n            \"modeloDeAssinaturaId\": 0,\r\n            \"tipoDeDocumentoId\": 0,\r\n            \"tipoDeDocumento\": {\r\n                \"id\": 87,\r\n                \"descricao\": \"Declaração de Matrícula\",\r\n                \"modeloDeFormulario\": false,\r\n                \"tipoDoNivelDeEscolaridade\": false,\r\n                \"tipoDeCpf\": false,\r\n                \"tipoDeRg\": false,\r\n                \"naoPermiteNumeroDoDocumento\": false,\r\n                \"grupo\": 0,\r\n                \"situacao\": false,\r\n                \"categoriaDoTipoDeDocumentoId\": null,\r\n                \"categoriaDoTipoDeDocumento\": null,\r\n                \"posicoesDasAssinaturasDoTipoDeDocumento\": null,\r\n                \"utilizacoesDosDocumentos\": null,\r\n                \"utilizacoesDosDocumentosIds\": null\r\n            },\r\n            \"modeloDeAssinatura\": null\r\n        }\r\n    ],\r\n    \"nomeFormatado\": \"A_TC_Alterado acertei\",\r\n    \"regionalId\": 1\r\n}"
 						},
-						"url": {
-							"raw": "{{Servidor}}/admserver/api/ModeloDeAssinatura/ReabrirModelo/",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"admserver",
-								"api",
-								"ModeloDeAssinatura",
-								"ReabrirModelo",
-								""
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Teste Concluir",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/admserver/api/ModeloDeAssinatura/Concluir/",
 						"method": "POST",
 						"header": [
 							{
@@ -524,42 +336,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 35,\r\n    \"nome\": \"A_TC_Alterado Novo nome\",\r\n    \"modeloPadrao\": true,\r\n    \"situacao\": true,\r\n    \"estadoDoModeloDeAssinatura\": 1,\r\n    \"tiposDeDocumentos\": [\r\n        {\r\n            \"id\": 87,\r\n            \"descricao\": \"Declaração de Matrícula\",\r\n            \"modeloDeFormulario\": false,\r\n            \"tipoDoNivelDeEscolaridade\": false,\r\n            \"tipoDeCpf\": false,\r\n            \"tipoDeRg\": false,\r\n            \"naoPermiteNumeroDoDocumento\": false,\r\n            \"grupo\": 1,\r\n            \"situacao\": true,\r\n            \"categoriaDoTipoDeDocumentoId\": 3,\r\n            \"categoriaDoTipoDeDocumento\": {\r\n                \"id\": 3,\r\n                \"nome\": \"Declaração Escolar\",\r\n                \"situacao\": true\r\n            },\r\n            \"posicoesDasAssinaturasDoTipoDeDocumento\": [],\r\n            \"utilizacoesDosDocumentos\": [\r\n                {\r\n                    \"id\": 3,\r\n                    \"nomeDoContexto\": \"Secretaria\",\r\n                    \"descricao\": \"Documentos obrigatórios para requisições de serviços\"\r\n                }\r\n            ],\r\n            \"utilizacoesDosDocumentosIds\": null,\r\n            \"badge\": \"Categoria: Declaração Escolar\"\r\n        }\r\n    ],\r\n    \"tiposDeDocumentoIds\": [\r\n        87\r\n    ],\r\n    \"nomeFormatado\": \"A_TC_Alterado Novo nome (Padrão)\",\r\n    \"regionalId\": 1,\r\n    \"unidadesOperativasIds\": [],\r\n    \"tiposDeDocumentosIds\": [],\r\n    \"validoPara\": 1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n    \"id\": 35,\r\n    \"nome\": \"A_TC_Alterado Novo nome\",\r\n    \"modeloPadrao\": true,\r\n    \"situacao\": true,\r\n    \"estadoDoModeloDeAssinatura\": 1,\r\n    \"tiposDeDocumentos\": [\r\n        {\r\n            \"id\": 87,\r\n            \"descricao\": \"Declaração de Matrícula\",\r\n            \"modeloDeFormulario\": false,\r\n            \"tipoDoNivelDeEscolaridade\": false,\r\n            \"tipoDeCpf\": false,\r\n            \"tipoDeRg\": false,\r\n            \"naoPermiteNumeroDoDocumento\": false,\r\n            \"grupo\": 1,\r\n            \"situacao\": true,\r\n            \"categoriaDoTipoDeDocumentoId\": 3,\r\n            \"categoriaDoTipoDeDocumento\": {\r\n                \"id\": 3,\r\n                \"nome\": \"Declaração Escolar\",\r\n                \"situacao\": true\r\n            },\r\n            \"posicoesDasAssinaturasDoTipoDeDocumento\": [],\r\n            \"utilizacoesDosDocumentos\": [\r\n                {\r\n                    \"id\": 3,\r\n                    \"nomeDoContexto\": \"Secretaria\",\r\n                    \"descricao\": \"Documentos obrigatórios para requisições de serviços\"\r\n                }\r\n            ],\r\n            \"utilizacoesDosDocumentosIds\": null,\r\n            \"badge\": \"Categoria: Declaração Escolar\"\r\n        }\r\n    ],\r\n    \"tiposDeDocumentoIds\": [\r\n        87\r\n    ],\r\n    \"nomeFormatado\": \"A_TC_Alterado Novo nome (Padrão)\",\r\n    \"regionalId\": 1,\r\n    \"unidadesOperativasIds\": [],\r\n    \"tiposDeDocumentosIds\": [],\r\n    \"validoPara\": 1\r\n}"
 						},
-						"url": {
-							"raw": "{{Servidor}}/admserver/api/ModeloDeAssinatura/Concluir/",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"admserver",
-								"api",
-								"ModeloDeAssinatura",
-								"Concluir",
-								""
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Teste Delete",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/admserver/api/ModeloDeAssinatura/122",
 						"method": "DELETE",
 						"header": [
 							{
@@ -570,25 +356,9 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
-						"url": {
-							"raw": "{{Servidor}}/admserver/api/ModeloDeAssinatura/122",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"admserver",
-								"api",
-								"ModeloDeAssinatura",
-								"122"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				}
@@ -596,20 +366,12 @@
 		},
 		{
 			"name": "Modulo Eixo Tecnologico",
+			"description": "",
 			"item": [
 				{
 					"name": "ObterListaDeEixoTecnologico",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/EixoTecnologico/ObterListaDeEixoTecnologico",
 						"method": "GET",
 						"header": [
 							{
@@ -618,42 +380,17 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/EixoTecnologico/ObterListaDeEixoTecnologico",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"EixoTecnologico",
-								"ObterListaDeEixoTecnologico"
-							]
-						}
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Get",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{Token}}",
-								"type": "text"
-							}
-						],
 						"url": {
 							"raw": "{{Servidor}}/planocursoserver/api/EixoTecnologico?Pagina=1&TamanhoDaPagina=10&OrdenarPor=Nome",
 							"host": [
@@ -697,24 +434,29 @@
 									"value": "Ambiente",
 									"disabled": true
 								}
-							]
-						}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Adicionando novo eixo",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/EixoTecnologico",
 						"method": "POST",
 						"header": [
 							{
@@ -725,40 +467,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 0,\r\n    \"nome\": \"A_Cadastro Novo da Taci 21/06\", //\"Cadastro de Eixo Tecnológico\", //\r\n    \"descricao\": \"Segmentos do Eixo Tecnológico\",\r\n    \"situacao\": true,\r\n    \"segmentoIds\": [\r\n        1\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n    \"id\": 0,\r\n    \"nome\": \"A_Cadastro Novo da Taci 21/06\", //\"Cadastro de Eixo Tecnológico\", //\r\n    \"descricao\": \"Segmentos do Eixo Tecnológico\",\r\n    \"situacao\": true,\r\n    \"segmentoIds\": [\r\n        1\r\n    ]\r\n}"
 						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/EixoTecnologico",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"EixoTecnologico"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Deletando eixo",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/EixoTecnologico/15",
 						"method": "DELETE",
 						"header": [
 							{
@@ -771,18 +489,7 @@
 							"mode": "raw",
 							"raw": ""
 						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/EixoTecnologico/15",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"EixoTecnologico",
-								"15"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				}
@@ -790,20 +497,12 @@
 		},
 		{
 			"name": "Modulo Unidade Curricular",
+			"description": "",
 			"item": [
 				{
 					"name": "Unidade Curricular - id",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/UnidadeCurricular/3486",
 						"method": "GET",
 						"header": [
 							{
@@ -812,42 +511,17 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/UnidadeCurricular/3486",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"UnidadeCurricular",
-								"3486"
-							]
-						}
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Unidade Curricular",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{Token}}",
-								"type": "text"
-							}
-						],
 						"url": {
 							"raw": "{{Servidor}}/planocursoserver/api/UnidadeCurricular?Pagina=1&TamanhoDaPagina=10&OrdenarPor=Id",
 							"host": [
@@ -876,24 +550,29 @@
 									"value": "",
 									"disabled": true
 								}
-							]
-						}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Adicionando nova UC",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/UnidadeCurricular",
 						"method": "POST",
 						"header": [
 							{
@@ -904,40 +583,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 0,\r\n  \"nome\": \"Teste\",\r\n  \"situacao\": true,\r\n  \"descricao\": \"teste\",\r\n  \"validadoNacionalmente\": false,\r\n  \"estado\": \"1\",\r\n  \"desenvolveCompetencia\": \"0\",\r\n  \"naturezaDiferenciada\": false,\r\n  \"cargaHoraria\": \"10\",\r\n  \"cargaHorariaMaxima\": \"10\",\r\n  \"tipoDeNaturezaDiferenciadaId\": \"\",\r\n  \"avaliacaoPorIndicador\": true,\r\n  \"avaliacaoPorConteudo\": false,\r\n  \"avaliacaoPorParticipacaoFrequencia\": true,\r\n  \"indicadorIds\": [\r\n    5976\r\n  ],\r\n  \"conteudoIds\": [],\r\n  \"elementoDaCompetenciaIds\": [\r\n    22329\r\n  ],\r\n  \"unidadesCurricularesCorrelatasIds\": [],\r\n  \"temasGeradores\": null\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n  \"id\": 0,\r\n  \"nome\": \"Teste\",\r\n  \"situacao\": true,\r\n  \"descricao\": \"teste\",\r\n  \"validadoNacionalmente\": false,\r\n  \"estado\": \"1\",\r\n  \"desenvolveCompetencia\": \"0\",\r\n  \"naturezaDiferenciada\": false,\r\n  \"cargaHoraria\": \"10\",\r\n  \"cargaHorariaMaxima\": \"10\",\r\n  \"tipoDeNaturezaDiferenciadaId\": \"\",\r\n  \"avaliacaoPorIndicador\": true,\r\n  \"avaliacaoPorConteudo\": false,\r\n  \"avaliacaoPorParticipacaoFrequencia\": true,\r\n  \"indicadorIds\": [\r\n    5976\r\n  ],\r\n  \"conteudoIds\": [],\r\n  \"elementoDaCompetenciaIds\": [\r\n    22329\r\n  ],\r\n  \"unidadesCurricularesCorrelatasIds\": [],\r\n  \"temasGeradores\": null\r\n}"
 						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/UnidadeCurricular",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"UnidadeCurricular"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Deletando UC",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/UnidadeCurricular/15190",
 						"method": "DELETE",
 						"header": [
 							{
@@ -950,18 +605,7 @@
 							"mode": "raw",
 							"raw": ""
 						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/UnidadeCurricular/15190",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"UnidadeCurricular",
-								"15190"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				}
@@ -969,23 +613,12 @@
 		},
 		{
 			"name": "Modulo Título",
+			"description": "",
 			"item": [
 				{
 					"name": "Titulo",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/Titulo",
 						"method": "GET",
 						"header": [
 							{
@@ -996,43 +629,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"total\": 0,\r\n  \"informacoesGerais\": {},\r\n  \"lista\": [\r\n    {}\r\n  ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n  \"total\": 0,\r\n  \"informacoesGerais\": {},\r\n  \"lista\": [\r\n    {}\r\n  ]\r\n}"
 						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/Titulo",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"Titulo"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Título Id",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/Titulo/11996",
 						"method": "GET",
 						"header": [
 							{
@@ -1041,38 +647,15 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/Titulo/11996",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"Titulo",
-								"11996"
-							]
-						}
+						"body": {},
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Cadastrar Titulo DR - CR - ES",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/Titulo",
 						"method": "POST",
 						"header": [
 							{
@@ -1083,40 +666,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 0,\r\n  \"nome\": \"CR - ES NDC Curso com Encerramento por Oferta\",\r\n  \"tituloDeOrigem\": null,\r\n  \"justificativa\": \"\",\r\n  \"cargaHoraria\": 10,\r\n  \"eixoTecnologicoId\": 1,\r\n  \"segmentoId\": 8,\r\n  \"modalidadeId\": 3,\r\n  \"tipoDeAcaoId\": 14,\r\n  \"situacao\": true,\r\n  \"prefixoDaCertificacaoId\": 1,\r\n  \"solicitarCbo\": false,\r\n  \"estadoId\": 3,\r\n  \"recursoFinanceiroIds\": [\r\n    1,\r\n    2,\r\n    3\r\n  ],\r\n  \"ocupacaoCboIds\": []\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n  \"id\": 0,\r\n  \"nome\": \"CR - ES NDC Curso com Encerramento por Oferta\",\r\n  \"tituloDeOrigem\": null,\r\n  \"justificativa\": \"\",\r\n  \"cargaHoraria\": 10,\r\n  \"eixoTecnologicoId\": 1,\r\n  \"segmentoId\": 8,\r\n  \"modalidadeId\": 3,\r\n  \"tipoDeAcaoId\": 14,\r\n  \"situacao\": true,\r\n  \"prefixoDaCertificacaoId\": 1,\r\n  \"solicitarCbo\": false,\r\n  \"estadoId\": 3,\r\n  \"recursoFinanceiroIds\": [\r\n    1,\r\n    2,\r\n    3\r\n  ],\r\n  \"ocupacaoCboIds\": []\r\n}"
 						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/Titulo",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"Titulo"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Cadastrar Titulo DR - Enviar para Aprovação",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/Titulo",
 						"method": "POST",
 						"header": [
 							{
@@ -1127,40 +686,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 12346,\r\n  \"estadoId\": 4,\r\n  \"nome\": \"CR - ES NDC Curso com Encerramento por Oferta\",\r\n  \"tituloDeOrigem\": null,\r\n  \"justificativa\": \"\",\r\n  \"cargaHoraria\": 10,\r\n  \"eixoTecnologicoId\": 1,\r\n  \"segmentoId\": 8,\r\n  \"modalidadeId\": 3,\r\n  \"tipoDeAcaoId\": 14,\r\n  \"situacao\": true,\r\n  \"prefixoDaCertificacaoId\": 1,\r\n  \"solicitarCbo\": false,\r\n\r\n  \"recursoFinanceiroIds\": [\r\n    1,\r\n    2,\r\n    3\r\n  ],\r\n  \"ocupacaoCboIds\": []\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n  \"id\": 12346,\r\n  \"estadoId\": 4,\r\n  \"nome\": \"CR - ES NDC Curso com Encerramento por Oferta\",\r\n  \"tituloDeOrigem\": null,\r\n  \"justificativa\": \"\",\r\n  \"cargaHoraria\": 10,\r\n  \"eixoTecnologicoId\": 1,\r\n  \"segmentoId\": 8,\r\n  \"modalidadeId\": 3,\r\n  \"tipoDeAcaoId\": 14,\r\n  \"situacao\": true,\r\n  \"prefixoDaCertificacaoId\": 1,\r\n  \"solicitarCbo\": false,\r\n\r\n  \"recursoFinanceiroIds\": [\r\n    1,\r\n    2,\r\n    3\r\n  ],\r\n  \"ocupacaoCboIds\": []\r\n}"
 						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/Titulo",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"Titulo"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Cadastrar Titulo DR - Enviar para Aprovação",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/Titulo",
 						"method": "POST",
 						"header": [
 							{
@@ -1171,40 +706,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 12346,\r\n  \"estadoId\": 4,\r\n  \"nome\": \"CR - ES NDC Curso com Encerramento por Oferta\",\r\n  \"tituloDeOrigem\": null,\r\n  \"justificativa\": \"\",\r\n  \"cargaHoraria\": 10,\r\n  \"eixoTecnologicoId\": 1,\r\n  \"segmentoId\": 8,\r\n  \"modalidadeId\": 3,\r\n  \"tipoDeAcaoId\": 14,\r\n  \"situacao\": true,\r\n  \"prefixoDaCertificacaoId\": 1,\r\n  \"solicitarCbo\": false,\r\n\r\n  \"recursoFinanceiroIds\": [\r\n    1,\r\n    2,\r\n    3\r\n  ],\r\n  \"ocupacaoCboIds\": []\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n  \"id\": 12346,\r\n  \"estadoId\": 4,\r\n  \"nome\": \"CR - ES NDC Curso com Encerramento por Oferta\",\r\n  \"tituloDeOrigem\": null,\r\n  \"justificativa\": \"\",\r\n  \"cargaHoraria\": 10,\r\n  \"eixoTecnologicoId\": 1,\r\n  \"segmentoId\": 8,\r\n  \"modalidadeId\": 3,\r\n  \"tipoDeAcaoId\": 14,\r\n  \"situacao\": true,\r\n  \"prefixoDaCertificacaoId\": 1,\r\n  \"solicitarCbo\": false,\r\n\r\n  \"recursoFinanceiroIds\": [\r\n    1,\r\n    2,\r\n    3\r\n  ],\r\n  \"ocupacaoCboIds\": []\r\n}"
 						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/Titulo",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"Titulo"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Cadastrar Titulo DN - CR",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/Titulo",
 						"method": "POST",
 						"header": [
 							{
@@ -1215,40 +726,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 0,\r\n  \"nome\": \"CR - Nacional - ES NDC Curso com Encerramento por Oferta\",\r\n  \"tituloDeOrigem\": 1,\r\n  \"justificativa\": \"\",\r\n  \"cargaHoraria\": 10,\r\n  \"eixoTecnologicoId\": 1,\r\n  \"segmentoId\": 8,\r\n  \"modalidadeId\": 3,\r\n  \"tipoDeAcaoId\": 14,\r\n  \"situacao\": true,\r\n  \"prefixoDaCertificacaoId\": 1,\r\n  \"solicitarCbo\": false,\r\n  \"estadoId\": 3,\r\n  \"recursoFinanceiroIds\": [\r\n    1,\r\n    2,\r\n    3\r\n  ],\r\n  \"ocupacaoCboIds\": []\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n  \"id\": 0,\r\n  \"nome\": \"CR - Nacional - ES NDC Curso com Encerramento por Oferta\",\r\n  \"tituloDeOrigem\": 1,\r\n  \"justificativa\": \"\",\r\n  \"cargaHoraria\": 10,\r\n  \"eixoTecnologicoId\": 1,\r\n  \"segmentoId\": 8,\r\n  \"modalidadeId\": 3,\r\n  \"tipoDeAcaoId\": 14,\r\n  \"situacao\": true,\r\n  \"prefixoDaCertificacaoId\": 1,\r\n  \"solicitarCbo\": false,\r\n  \"estadoId\": 3,\r\n  \"recursoFinanceiroIds\": [\r\n    1,\r\n    2,\r\n    3\r\n  ],\r\n  \"ocupacaoCboIds\": []\r\n}"
 						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/Titulo",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"Titulo"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Cadastrar Titulo",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/Titulo",
 						"method": "POST",
 						"header": [
 							{
@@ -1259,40 +746,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 0,\r\n    \"nome\": \"Cadastrando título pelo postman 03\",\r\n    \"estadoId\": 1,\r\n    \"situacao\": true,\r\n    \"justificativa\": \"Identificado que ao cadastrar um plano novo pelo DR, está sendo apresentada a tag do DN, indevidamente.\",\r\n    \"cargaHoraria\": 20,\r\n    \"eixoTecnologicoId\": 3,\r\n    \"eixoTecnologico\": {\r\n        \"id\": 3,\r\n        \"nome\": \"Gestão e Negócios\",\r\n        \"situacao\": false\r\n        /*\"descricao\": null,\r\n        \"segmentoIds\": null,\r\n        \"segmentosSelecionados\": null,\r\n        \"regionalId\": null*/\r\n    },\r\n    \"segmentoId\": 2,\r\n    \"segmento\": {\r\n        \"id\": 2,\r\n        \"descricao\": null,\r\n        \"situacao\": false,\r\n        \"nome\": \"Comércio\",\r\n        \"regionalId\": null\r\n    },\r\n    \"modalidadeId\": 2,\r\n    \"modalidade\": {\r\n        \"id\": 2,\r\n        \"nome\": \"Educação Profissional Técnica de Nível Médio\",\r\n        \"situacao\": false,\r\n        \"descricao\": null,\r\n        \"regionalId\": null\r\n    },\r\n    //\"categoriaId\": 0,\r\n    //\"categoria\": null,\r\n    //\"anexo\": null,\r\n    \"tipoDeAcaoId\": 3,\r\n    \"tipoDeAcao\": {\r\n        \"id\": 3,\r\n        \"nome\": \"Qualificação Profissional  Técnica\",\r\n        \"descricao\": null,\r\n        \"cargaHorariaMinima\": 0,\r\n        \"situacao\": false,\r\n        \"modalidadeId\": null,\r\n        \"modalidade\": null,\r\n        \"nomeDaModalidade\": null,\r\n        \"quadroDeAcaoId\": 0,\r\n        /*\"permiteCertificacaoIntermediaria\": false,\r\n        \"permiteUtilizarComoCertificacaoIntermediariaDeUmTitulo\": true,\r\n        \"permiteAgrupamentoDeTitulosPorCategoria\": false,\r\n        \"exigirDocumentoDeAutorizacaoNaAutorizacaoDaExecucao\": false,\r\n        \"enviarTitulosVinculadosParaAprovacaoNacional\": false,\r\n        \"comCaracteristicaDeTurma\": false,\r\n        \"permiteIntegralizar\": false,\r\n        \"termoDoGlossarioParaEmissaoDaCertificacaoId\": 0,\r\n        \"permitirUnidadeCurricularComCaracteristicaMista\": false,\r\n        \"possuiPlanoDeCurso\": false,*/\r\n        \"termoDoGlossarioParaEmissaoDaCertificacao\": {\r\n            \"id\": 5,\r\n            \"nome\": \"Certificado de Qualificação Profissional Técnica\",\r\n            \"tipoDeDocumentoId\": 78\r\n        },\r\n        \"regionalId\": null\r\n    },\r\n    \"recursoFinanceiroIds\": [\r\n        2,\r\n        3,\r\n        6,\r\n        7,\r\n        8,\r\n        9\r\n    ],\r\n    \"recursosFinanceiros\": [\r\n        {\r\n            \"id\": 2,\r\n            \"descricao\": null,\r\n            \"situacao\": false,\r\n            \"nome\": \"Comercial\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"descricao\": null,\r\n            \"situacao\": false,\r\n            \"nome\": \"Recursos do DR\"\r\n        },\r\n        {\r\n            \"id\": 6,\r\n            \"descricao\": null,\r\n            \"situacao\": false,\r\n            \"nome\": \"Sebraetec\"\r\n        },\r\n        {\r\n            \"id\": 7,\r\n            \"descricao\": null,\r\n            \"situacao\": false,\r\n            \"nome\": \"Senac Empresa / Corporativo\"\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"descricao\": null,\r\n            \"situacao\": false,\r\n            \"nome\": \"Superparceiros\"\r\n        },\r\n        {\r\n            \"id\": 9,\r\n            \"descricao\": null,\r\n            \"situacao\": false,\r\n            \"nome\": \"Programa SENAC Comércio\"\r\n        }\r\n    ],\r\n    /*\"certificacaoIntermediariaIds\": [],\r\n    \"certificacoesIntermediarias\": [],\r\n    \"solicitarCbo\": false,\r\n    \"ocupacaoCboIds\": [],\r\n    \"ocupacoesCbo\": [],*/\r\n    \"prefixoDaCertificacaoId\": 2,\r\n    \"prefixoDaCertificacao\": {\r\n        \"id\": 2,\r\n        \"descricao\": \"o Curso\",\r\n        \"situacao\": null\r\n    }\r\n    /*\"tituloDeOrigem\": null,\r\n    \"validadoNacionalmente\": false,\r\n    \"nomeComCodigo\": \"11992 - Apresentação da tags DR e DN no cadastro de plano de curso novo\",\r\n    \"possuiDocumentoPadraoNacional\": false,\r\n    \"documentoUsoObrigatorio\": false,\r\n    \"regionalId\": 1*/\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n    \"id\": 0,\r\n    \"nome\": \"Cadastrando título pelo postman 03\",\r\n    \"estadoId\": 1,\r\n    \"situacao\": true,\r\n    \"justificativa\": \"Identificado que ao cadastrar um plano novo pelo DR, está sendo apresentada a tag do DN, indevidamente.\",\r\n    \"cargaHoraria\": 20,\r\n    \"eixoTecnologicoId\": 3,\r\n    \"eixoTecnologico\": {\r\n        \"id\": 3,\r\n        \"nome\": \"Gestão e Negócios\",\r\n        \"situacao\": false\r\n        /*\"descricao\": null,\r\n        \"segmentoIds\": null,\r\n        \"segmentosSelecionados\": null,\r\n        \"regionalId\": null*/\r\n    },\r\n    \"segmentoId\": 2,\r\n    \"segmento\": {\r\n        \"id\": 2,\r\n        \"descricao\": null,\r\n        \"situacao\": false,\r\n        \"nome\": \"Comércio\",\r\n        \"regionalId\": null\r\n    },\r\n    \"modalidadeId\": 2,\r\n    \"modalidade\": {\r\n        \"id\": 2,\r\n        \"nome\": \"Educação Profissional Técnica de Nível Médio\",\r\n        \"situacao\": false,\r\n        \"descricao\": null,\r\n        \"regionalId\": null\r\n    },\r\n    //\"categoriaId\": 0,\r\n    //\"categoria\": null,\r\n    //\"anexo\": null,\r\n    \"tipoDeAcaoId\": 3,\r\n    \"tipoDeAcao\": {\r\n        \"id\": 3,\r\n        \"nome\": \"Qualificação Profissional  Técnica\",\r\n        \"descricao\": null,\r\n        \"cargaHorariaMinima\": 0,\r\n        \"situacao\": false,\r\n        \"modalidadeId\": null,\r\n        \"modalidade\": null,\r\n        \"nomeDaModalidade\": null,\r\n        \"quadroDeAcaoId\": 0,\r\n        /*\"permiteCertificacaoIntermediaria\": false,\r\n        \"permiteUtilizarComoCertificacaoIntermediariaDeUmTitulo\": true,\r\n        \"permiteAgrupamentoDeTitulosPorCategoria\": false,\r\n        \"exigirDocumentoDeAutorizacaoNaAutorizacaoDaExecucao\": false,\r\n        \"enviarTitulosVinculadosParaAprovacaoNacional\": false,\r\n        \"comCaracteristicaDeTurma\": false,\r\n        \"permiteIntegralizar\": false,\r\n        \"termoDoGlossarioParaEmissaoDaCertificacaoId\": 0,\r\n        \"permitirUnidadeCurricularComCaracteristicaMista\": false,\r\n        \"possuiPlanoDeCurso\": false,*/\r\n        \"termoDoGlossarioParaEmissaoDaCertificacao\": {\r\n            \"id\": 5,\r\n            \"nome\": \"Certificado de Qualificação Profissional Técnica\",\r\n            \"tipoDeDocumentoId\": 78\r\n        },\r\n        \"regionalId\": null\r\n    },\r\n    \"recursoFinanceiroIds\": [\r\n        2,\r\n        3,\r\n        6,\r\n        7,\r\n        8,\r\n        9\r\n    ],\r\n    \"recursosFinanceiros\": [\r\n        {\r\n            \"id\": 2,\r\n            \"descricao\": null,\r\n            \"situacao\": false,\r\n            \"nome\": \"Comercial\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"descricao\": null,\r\n            \"situacao\": false,\r\n            \"nome\": \"Recursos do DR\"\r\n        },\r\n        {\r\n            \"id\": 6,\r\n            \"descricao\": null,\r\n            \"situacao\": false,\r\n            \"nome\": \"Sebraetec\"\r\n        },\r\n        {\r\n            \"id\": 7,\r\n            \"descricao\": null,\r\n            \"situacao\": false,\r\n            \"nome\": \"Senac Empresa / Corporativo\"\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"descricao\": null,\r\n            \"situacao\": false,\r\n            \"nome\": \"Superparceiros\"\r\n        },\r\n        {\r\n            \"id\": 9,\r\n            \"descricao\": null,\r\n            \"situacao\": false,\r\n            \"nome\": \"Programa SENAC Comércio\"\r\n        }\r\n    ],\r\n    /*\"certificacaoIntermediariaIds\": [],\r\n    \"certificacoesIntermediarias\": [],\r\n    \"solicitarCbo\": false,\r\n    \"ocupacaoCboIds\": [],\r\n    \"ocupacoesCbo\": [],*/\r\n    \"prefixoDaCertificacaoId\": 2,\r\n    \"prefixoDaCertificacao\": {\r\n        \"id\": 2,\r\n        \"descricao\": \"o Curso\",\r\n        \"situacao\": null\r\n    }\r\n    /*\"tituloDeOrigem\": null,\r\n    \"validadoNacionalmente\": false,\r\n    \"nomeComCodigo\": \"11992 - Apresentação da tags DR e DN no cadastro de plano de curso novo\",\r\n    \"possuiDocumentoPadraoNacional\": false,\r\n    \"documentoUsoObrigatorio\": false,\r\n    \"regionalId\": 1*/\r\n}"
 						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/Titulo",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"Titulo"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Adicionando novo Título",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/UnidadeCurricular",
 						"method": "POST",
 						"header": [
 							{
@@ -1303,40 +766,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 3486,\r\n    \"nome\": \"3486 - UC 1 Ensino Superior - 50h a 70h - Taci SP 20\",\r\n    \"estadoId\": 1,\r\n    \"situacao\": true,\r\n    \"desenvolveCompetencia\": 0,\r\n    \"naturezaDiferenciada\": false,\r\n    \"cargaHoraria\": 50,\r\n    \"tipoDeNaturezaDiferenciadaId\": 0,\r\n    \"tipoDeNaturezaDiferenciadaDescricao\": \"\",\r\n    \"validadoNacionalmente\": true,\r\n    \"temaGeradorIds\": [],\r\n    \"temasGeradores\": [],\r\n    \"indicadorIds\": [\r\n        5976,\r\n        5978\r\n    ],\r\n    \"ucInterna\": false,\r\n    \"avaliacaoPorIndicador\": true,\r\n    \"avaliacaoPorParticipacaoFrequencia\": true,\r\n    \"unidadesCurricularesCorrelatas\": [],\r\n    \"unidadesCurricularesCorrelatasIds\": [],\r\n    \"cargaHorariaMaxima\": 70,\r\n    \"permiteCargaHorariaMinimaMaxima\": true,\r\n    \"descricao\": \"3486 - UC 1 Ensino Superior - 50h a 70h\",\r\n    \"tipoDeUnidadeCurricular\": null,\r\n    \"regionalId\": 1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n    \"id\": 3486,\r\n    \"nome\": \"3486 - UC 1 Ensino Superior - 50h a 70h - Taci SP 20\",\r\n    \"estadoId\": 1,\r\n    \"situacao\": true,\r\n    \"desenvolveCompetencia\": 0,\r\n    \"naturezaDiferenciada\": false,\r\n    \"cargaHoraria\": 50,\r\n    \"tipoDeNaturezaDiferenciadaId\": 0,\r\n    \"tipoDeNaturezaDiferenciadaDescricao\": \"\",\r\n    \"validadoNacionalmente\": true,\r\n    \"temaGeradorIds\": [],\r\n    \"temasGeradores\": [],\r\n    \"indicadorIds\": [\r\n        5976,\r\n        5978\r\n    ],\r\n    \"ucInterna\": false,\r\n    \"avaliacaoPorIndicador\": true,\r\n    \"avaliacaoPorParticipacaoFrequencia\": true,\r\n    \"unidadesCurricularesCorrelatas\": [],\r\n    \"unidadesCurricularesCorrelatasIds\": [],\r\n    \"cargaHorariaMaxima\": 70,\r\n    \"permiteCargaHorariaMinimaMaxima\": true,\r\n    \"descricao\": \"3486 - UC 1 Ensino Superior - 50h a 70h\",\r\n    \"tipoDeUnidadeCurricular\": null,\r\n    \"regionalId\": 1\r\n}"
 						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/UnidadeCurricular",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"UnidadeCurricular"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Deletando Título",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/Titulo/11997",
 						"method": "DELETE",
 						"header": [
 							{
@@ -1349,18 +788,7 @@
 							"mode": "raw",
 							"raw": ""
 						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/Titulo/11997",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"Titulo",
-								"11997"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				}
@@ -1368,20 +796,12 @@
 		},
 		{
 			"name": "Modulo Plano de Curso",
+			"description": "",
 			"item": [
 				{
 					"name": "Plano de Curso Id",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/PlanoDoCurso/41054",
 						"method": "GET",
 						"header": [
 							{
@@ -1390,34 +810,18 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/PlanoDoCurso/41054",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"PlanoDoCurso",
-								"41054"
-							]
-						}
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Cadastrar",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/AcaoEducacional",
 						"method": "POST",
 						"header": [
 							{
@@ -1428,40 +832,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"possuiDocumentoPadraoNacional\": null,\r\n  \"documentoUsoObrigatorio\": null,\r\n  \"regionalId\": 1,\r\n  \"validadoNacionalmente\": false,\r\n  \"ocupacaoCboIds\": [],\r\n  \"ocupacoesCbo\": [],\r\n  \"tituloId\": 1217,\r\n  \"situacao\": true,\r\n  \"desenvolveCompetencia\": \"2\",\r\n  \"indicadorComoFormaDeAvaliacao\": false,\r\n  \"frequenciaEParticipacaoComoFormaDeAvaliacao\": false,\r\n  \"liberarPlanoNacionalmente\": false,\r\n  \"usuarioDn\": false,\r\n  \"encerramentoPorOferta\": false,\r\n  \"permitirPublicarInternet\": false,\r\n  \"permitirDemanda\": false\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n  \"possuiDocumentoPadraoNacional\": null,\r\n  \"documentoUsoObrigatorio\": null,\r\n  \"regionalId\": 1,\r\n  \"validadoNacionalmente\": false,\r\n  \"ocupacaoCboIds\": [],\r\n  \"ocupacoesCbo\": [],\r\n  \"tituloId\": 1217,\r\n  \"situacao\": true,\r\n  \"desenvolveCompetencia\": \"2\",\r\n  \"indicadorComoFormaDeAvaliacao\": false,\r\n  \"frequenciaEParticipacaoComoFormaDeAvaliacao\": false,\r\n  \"liberarPlanoNacionalmente\": false,\r\n  \"usuarioDn\": false,\r\n  \"encerramentoPorOferta\": false,\r\n  \"permitirPublicarInternet\": false,\r\n  \"permitirDemanda\": false\r\n}"
 						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/AcaoEducacional",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"AcaoEducacional"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Informações Básicas",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/InformacoesBasicasDaAcaoEducacional",
 						"method": "POST",
 						"header": [
 							{
@@ -1472,40 +852,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 0,\r\n    \"planoDoCursoId\": 41073,\r\n    \"justificativaEObjetivos\": \"<h3>Incluir informação</h3>\",\r\n    \"objetivoResumidoParaCliente\": null,\r\n    \"perfilProfissionalDeConclusao\": \"<h3>Informações Básicas</h3>\",\r\n    \"orientacoesMetodologicas\": \"<h3>Informações Básicas</h3>\",\r\n    \"aproveitamentoDeConhecimentoEDeExperiencias\": \"<h3>Informações Básicas</h3>\",\r\n    \"avaliacao\": \"<h3>Informações Básicas</h3>\",\r\n    \"estagioProfissionalSupervisionado\": null,\r\n    \"instalacaoEEquipamentosERecursosDidaticos\": \"<h3>Informações Básicas</h3>\",\r\n    \"perfilDoPessoalDocenteETecnico\": \"<h3>Informações Básicas</h3>\",\r\n    \"bibliografia\": \"<h3>Informações Básicas</h3>\",\r\n    \"referencia\": null,\r\n    \"estaCompleto\": false,\r\n    \"possuiTurmaCriada\": false,\r\n    \"informacoesParaVersoDeCertificados\": \"<h3>Informações Básicas</h3>\",\r\n    \"aplicarAjustes\": false,\r\n    \"regionalId\": null\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n    \"id\": 0,\r\n    \"planoDoCursoId\": 41073,\r\n    \"justificativaEObjetivos\": \"<h3>Incluir informação</h3>\",\r\n    \"objetivoResumidoParaCliente\": null,\r\n    \"perfilProfissionalDeConclusao\": \"<h3>Informações Básicas</h3>\",\r\n    \"orientacoesMetodologicas\": \"<h3>Informações Básicas</h3>\",\r\n    \"aproveitamentoDeConhecimentoEDeExperiencias\": \"<h3>Informações Básicas</h3>\",\r\n    \"avaliacao\": \"<h3>Informações Básicas</h3>\",\r\n    \"estagioProfissionalSupervisionado\": null,\r\n    \"instalacaoEEquipamentosERecursosDidaticos\": \"<h3>Informações Básicas</h3>\",\r\n    \"perfilDoPessoalDocenteETecnico\": \"<h3>Informações Básicas</h3>\",\r\n    \"bibliografia\": \"<h3>Informações Básicas</h3>\",\r\n    \"referencia\": null,\r\n    \"estaCompleto\": false,\r\n    \"possuiTurmaCriada\": false,\r\n    \"informacoesParaVersoDeCertificados\": \"<h3>Informações Básicas</h3>\",\r\n    \"aplicarAjustes\": false,\r\n    \"regionalId\": null\r\n}"
 						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/InformacoesBasicasDaAcaoEducacional",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"InformacoesBasicasDaAcaoEducacional"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Informações Básicas de Venda",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/InformacoesDeVendaDoPlanoDoCurso",
 						"method": "POST",
 						"header": [
 							{
@@ -1516,40 +872,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 30446,\r\n  \"planoDoCursoId\": 41072,\r\n  \"termosECondicoesGerais\": \"<h3>Incluir informação</h3>\",\r\n  \"informacoesParaVendaOnline\": \"<h3>Incluir informação</h3>\",\r\n  \"estaCompleto\": true,\r\n  \"regionalId\": null\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n  \"id\": 30446,\r\n  \"planoDoCursoId\": 41072,\r\n  \"termosECondicoesGerais\": \"<h3>Incluir informação</h3>\",\r\n  \"informacoesParaVendaOnline\": \"<h3>Incluir informação</h3>\",\r\n  \"estaCompleto\": true,\r\n  \"regionalId\": null\r\n}"
 						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/InformacoesDeVendaDoPlanoDoCurso",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"InformacoesDeVendaDoPlanoDoCurso"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Requisitos do Plano do Curso",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/planocursoserver/api/RequisitoDoPlanoDoCurso",
 						"method": "POST",
 						"header": [
 							{
@@ -1560,24 +892,9 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 12514,\r\n    \"descricao\": \"\",\r\n    \"planoDoCursoId\": 41072,\r\n    \"estaCompleto\": true,\r\n    \"requisitoIds\": [\r\n        2\r\n    ],\r\n    \"requisitos\": [\r\n        {\r\n            \"categoriaDeRequisitoId\": 3,\r\n            \"descricao\": \"<h3>Idade mínima 18 anos</h3>\",\r\n            \"id\": 2,\r\n            \"nomeDaCategoriaDeRequisito\": \"<h3>Idade</h3>\",\r\n            \"nomeDoNivelDeEscolaridade\": null,\r\n            \"nomeDoOperador\": \"<h3>Maior ou Igual</h3>\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDoTipoDeRequisito\": \"<h3>Acesso ao Curso</h3>\",\r\n            \"valor\": \"18\",\r\n            \"operadorId\": 4,\r\n            \"tipoDeRequisitoId\": 0,\r\n            \"tipoDeDocumentoId\": 0,\r\n            \"nomeDoTipoDeDocumento\": null,\r\n            \"nivelDeEscolaridadeId\": 0,\r\n            \"ordemDoNivelDeEscolaridade\": 0,\r\n            \"obrigatorioCopiaDoDocumento\": false,\r\n            \"obrigatorioCadastroDoDocumento\": false\r\n        }\r\n    ],\r\n    \"possuiTurmaCriada\": false,\r\n    \"regionalId\": null\r\n}\r\n\r\n\r\n/*{\r\n    \"total\": 154,\r\n    \"informacoesGerais\": null,\r\n    \"lista\": [\r\n        {\r\n            \"id\": 1,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Acesso Ao Curso\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Idade\",\r\n            \"categoriaDeRequisitoId\": 3,\r\n            \"nomeDoTipoDeDocumento\": null,\r\n            \"nomeDoNivelDeEscolaridade\": null,\r\n            \"nomeDoOperador\": \"Maior ou Igual\",\r\n            \"valor\": \"16\",\r\n            \"descricao\": \"Idade maior ou igual a 16 anos.\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Acesso Ao Curso\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Idade\",\r\n            \"categoriaDeRequisitoId\": 3,\r\n            \"nomeDoTipoDeDocumento\": null,\r\n            \"nomeDoNivelDeEscolaridade\": null,\r\n            \"nomeDoOperador\": \"Maior ou Igual\",\r\n            \"valor\": \"18\",\r\n            \"descricao\": \"Idade mínima: 18 anos\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Acesso Ao Curso\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Escolaridade\",\r\n            \"categoriaDeRequisitoId\": 2,\r\n            \"nomeDoTipoDeDocumento\": \"Comprovante de Escolaridade\",\r\n            \"nomeDoNivelDeEscolaridade\": \"Ensino Fundamental Completo\",\r\n            \"nomeDoOperador\": \"\",\r\n            \"valor\": \"\",\r\n            \"descricao\": \"Ensino Fundamental Completo\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Documento Necessário Para Matrícula\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Documental\",\r\n            \"categoriaDeRequisitoId\": 1,\r\n            \"nomeDoTipoDeDocumento\": \"RG\",\r\n            \"nomeDoNivelDeEscolaridade\": null,\r\n            \"nomeDoOperador\": \"\",\r\n            \"valor\": \"\",\r\n            \"descricao\": \"RG.\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Documento Necessário Para Matrícula\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Documental\",\r\n            \"categoriaDeRequisitoId\": 1,\r\n            \"nomeDoTipoDeDocumento\": \"CPF\",\r\n            \"nomeDoNivelDeEscolaridade\": null,\r\n            \"nomeDoOperador\": \"\",\r\n            \"valor\": \"\",\r\n            \"descricao\": \"CPF\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 6,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Acesso Ao Curso\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Escolaridade\",\r\n            \"categoriaDeRequisitoId\": 2,\r\n            \"nomeDoTipoDeDocumento\": \"Comprovante de Escolaridade\",\r\n            \"nomeDoNivelDeEscolaridade\": \"Ensino Médio Incompleto\",\r\n            \"nomeDoOperador\": \"\",\r\n            \"valor\": \"\",\r\n            \"descricao\": \"Ensino Médio incompleto\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 7,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Documento Necessário Para Matrícula\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Documental\",\r\n            \"categoriaDeRequisitoId\": 1,\r\n            \"nomeDoTipoDeDocumento\": \"Comprovante de Residência\",\r\n            \"nomeDoNivelDeEscolaridade\": null,\r\n            \"nomeDoOperador\": \"\",\r\n            \"valor\": \"\",\r\n            \"descricao\": \"Comprovante de residência.\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Acesso Ao Curso\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Escolaridade\",\r\n            \"categoriaDeRequisitoId\": 2,\r\n            \"nomeDoTipoDeDocumento\": \"Comprovante de Escolaridade\",\r\n            \"nomeDoNivelDeEscolaridade\": \"Ensino Fundamental Incompleto\",\r\n            \"nomeDoOperador\": \"\",\r\n            \"valor\": \"\",\r\n            \"descricao\": \"Ensino Fundamental incompleto 6ª ano\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 9,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Acesso Ao Curso\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Idade\",\r\n            \"categoriaDeRequisitoId\": 3,\r\n            \"nomeDoTipoDeDocumento\": null,\r\n            \"nomeDoNivelDeEscolaridade\": null,\r\n            \"nomeDoOperador\": \"Maior ou Igual\",\r\n            \"valor\": \"15\",\r\n            \"descricao\": \"Idade maior ou igual a 15 anos.\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 10,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Acesso Ao Curso\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Idade\",\r\n            \"categoriaDeRequisitoId\": 3,\r\n            \"nomeDoTipoDeDocumento\": null,\r\n            \"nomeDoNivelDeEscolaridade\": null,\r\n            \"nomeDoOperador\": \"Maior ou Igual\",\r\n            \"valor\": \"14\",\r\n            \"descricao\": \"Idade mínima: 14 anos\",\r\n            \"regionalId\": 26\r\n        }\r\n    ]\r\n}    */",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n    \"id\": 12514,\r\n    \"descricao\": \"\",\r\n    \"planoDoCursoId\": 41072,\r\n    \"estaCompleto\": true,\r\n    \"requisitoIds\": [\r\n        2\r\n    ],\r\n    \"requisitos\": [\r\n        {\r\n            \"categoriaDeRequisitoId\": 3,\r\n            \"descricao\": \"<h3>Idade mínima 18 anos</h3>\",\r\n            \"id\": 2,\r\n            \"nomeDaCategoriaDeRequisito\": \"<h3>Idade</h3>\",\r\n            \"nomeDoNivelDeEscolaridade\": null,\r\n            \"nomeDoOperador\": \"<h3>Maior ou Igual</h3>\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDoTipoDeRequisito\": \"<h3>Acesso ao Curso</h3>\",\r\n            \"valor\": \"18\",\r\n            \"operadorId\": 4,\r\n            \"tipoDeRequisitoId\": 0,\r\n            \"tipoDeDocumentoId\": 0,\r\n            \"nomeDoTipoDeDocumento\": null,\r\n            \"nivelDeEscolaridadeId\": 0,\r\n            \"ordemDoNivelDeEscolaridade\": 0,\r\n            \"obrigatorioCopiaDoDocumento\": false,\r\n            \"obrigatorioCadastroDoDocumento\": false\r\n        }\r\n    ],\r\n    \"possuiTurmaCriada\": false,\r\n    \"regionalId\": null\r\n}\r\n\r\n\r\n/*{\r\n    \"total\": 154,\r\n    \"informacoesGerais\": null,\r\n    \"lista\": [\r\n        {\r\n            \"id\": 1,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Acesso Ao Curso\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Idade\",\r\n            \"categoriaDeRequisitoId\": 3,\r\n            \"nomeDoTipoDeDocumento\": null,\r\n            \"nomeDoNivelDeEscolaridade\": null,\r\n            \"nomeDoOperador\": \"Maior ou Igual\",\r\n            \"valor\": \"16\",\r\n            \"descricao\": \"Idade maior ou igual a 16 anos.\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Acesso Ao Curso\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Idade\",\r\n            \"categoriaDeRequisitoId\": 3,\r\n            \"nomeDoTipoDeDocumento\": null,\r\n            \"nomeDoNivelDeEscolaridade\": null,\r\n            \"nomeDoOperador\": \"Maior ou Igual\",\r\n            \"valor\": \"18\",\r\n            \"descricao\": \"Idade mínima: 18 anos\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Acesso Ao Curso\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Escolaridade\",\r\n            \"categoriaDeRequisitoId\": 2,\r\n            \"nomeDoTipoDeDocumento\": \"Comprovante de Escolaridade\",\r\n            \"nomeDoNivelDeEscolaridade\": \"Ensino Fundamental Completo\",\r\n            \"nomeDoOperador\": \"\",\r\n            \"valor\": \"\",\r\n            \"descricao\": \"Ensino Fundamental Completo\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Documento Necessário Para Matrícula\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Documental\",\r\n            \"categoriaDeRequisitoId\": 1,\r\n            \"nomeDoTipoDeDocumento\": \"RG\",\r\n            \"nomeDoNivelDeEscolaridade\": null,\r\n            \"nomeDoOperador\": \"\",\r\n            \"valor\": \"\",\r\n            \"descricao\": \"RG.\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 5,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Documento Necessário Para Matrícula\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Documental\",\r\n            \"categoriaDeRequisitoId\": 1,\r\n            \"nomeDoTipoDeDocumento\": \"CPF\",\r\n            \"nomeDoNivelDeEscolaridade\": null,\r\n            \"nomeDoOperador\": \"\",\r\n            \"valor\": \"\",\r\n            \"descricao\": \"CPF\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 6,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Acesso Ao Curso\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Escolaridade\",\r\n            \"categoriaDeRequisitoId\": 2,\r\n            \"nomeDoTipoDeDocumento\": \"Comprovante de Escolaridade\",\r\n            \"nomeDoNivelDeEscolaridade\": \"Ensino Médio Incompleto\",\r\n            \"nomeDoOperador\": \"\",\r\n            \"valor\": \"\",\r\n            \"descricao\": \"Ensino Médio incompleto\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 7,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Documento Necessário Para Matrícula\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Documental\",\r\n            \"categoriaDeRequisitoId\": 1,\r\n            \"nomeDoTipoDeDocumento\": \"Comprovante de Residência\",\r\n            \"nomeDoNivelDeEscolaridade\": null,\r\n            \"nomeDoOperador\": \"\",\r\n            \"valor\": \"\",\r\n            \"descricao\": \"Comprovante de residência.\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Acesso Ao Curso\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Escolaridade\",\r\n            \"categoriaDeRequisitoId\": 2,\r\n            \"nomeDoTipoDeDocumento\": \"Comprovante de Escolaridade\",\r\n            \"nomeDoNivelDeEscolaridade\": \"Ensino Fundamental Incompleto\",\r\n            \"nomeDoOperador\": \"\",\r\n            \"valor\": \"\",\r\n            \"descricao\": \"Ensino Fundamental incompleto 6ª ano\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 9,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Acesso Ao Curso\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Idade\",\r\n            \"categoriaDeRequisitoId\": 3,\r\n            \"nomeDoTipoDeDocumento\": null,\r\n            \"nomeDoNivelDeEscolaridade\": null,\r\n            \"nomeDoOperador\": \"Maior ou Igual\",\r\n            \"valor\": \"15\",\r\n            \"descricao\": \"Idade maior ou igual a 15 anos.\",\r\n            \"regionalId\": 26\r\n        },\r\n        {\r\n            \"id\": 10,\r\n            \"situacao\": \"Ativo\",\r\n            \"nomeDoTipoDeRequisito\": \"Acesso Ao Curso\",\r\n            \"nomeDoTipoDeIdentificacao\": null,\r\n            \"nomeDaCategoriaDeRequisito\": \"Idade\",\r\n            \"categoriaDeRequisitoId\": 3,\r\n            \"nomeDoTipoDeDocumento\": null,\r\n            \"nomeDoNivelDeEscolaridade\": null,\r\n            \"nomeDoOperador\": \"Maior ou Igual\",\r\n            \"valor\": \"14\",\r\n            \"descricao\": \"Idade mínima: 14 anos\",\r\n            \"regionalId\": 26\r\n        }\r\n    ]\r\n}    */"
 						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/RequisitoDoPlanoDoCurso",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"RequisitoDoPlanoDoCurso"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				}
@@ -1585,40 +902,11 @@
 		},
 		{
 			"name": "Modulo Ação Extensiva",
+			"description": "",
 			"item": [
 				{
 					"name": "Listar",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{Token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"total\": 0,\r\n  \"informacoesGerais\": {},\r\n  \"lista\": [\r\n    {}\r\n  ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{Servidor}}/planocursoserver/api/acaoextensiva?Pagina=1&TamanhoDaPagina=10&naoListarConsultorias=true",
 							"host": [
@@ -1632,18 +920,38 @@
 							"query": [
 								{
 									"key": "Pagina",
-									"value": "1"
+									"value": "1",
+									"equals": true,
+									"description": ""
 								},
 								{
 									"key": "TamanhoDaPagina",
-									"value": "10"
+									"value": "10",
+									"equals": true,
+									"description": ""
 								},
 								{
 									"key": "naoListarConsultorias",
-									"value": "true"
+									"value": "true",
+									"equals": true,
+									"description": ""
 								}
-							]
-						}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"total\": 0,\r\n  \"informacoesGerais\": {},\r\n  \"lista\": [\r\n    {}\r\n  ]\r\n}"
+						},
+						"description": ""
 					},
 					"response": []
 				}
@@ -1651,23 +959,12 @@
 		},
 		{
 			"name": "Serviço",
+			"description": "",
 			"item": [
 				{
 					"name": "Serviço",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/admserver/api/Servico/45",
 						"method": "GET",
 						"header": [
 							{
@@ -1678,41 +975,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
-						"url": {
-							"raw": "{{Servidor}}/admserver/api/Servico/45",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"admserver",
-								"api",
-								"Servico",
-								"45"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Alterar",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/admserver/api/Servico/AlterarSituacao",
 						"method": "PUT",
 						"header": [
 							{
@@ -1723,41 +995,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 45,\r\n  \"nome\": \"Não Cursar\",\r\n  \"situacao\": true,\r\n  \"tiposDeDocumento\": [\r\n    {\r\n      \"id\": 0,\r\n      \"descricao\": \"string\",\r\n      \"modeloDeFormulario\": true,\r\n      \"tipoDoNivelDeEscolaridade\": true,\r\n      \"tipoDeCpf\": true,\r\n      \"tipoDeRg\": true,\r\n      \"naoPermiteNumeroDoDocumento\": true,\r\n      \"grupo\": \"PessoaFisica\",\r\n      \"situacao\": true,\r\n      \"categoriaDoTipoDeDocumentoId\": 0,\r\n      \"categoriaDoTipoDeDocumento\": {\r\n        \"id\": 0,\r\n        \"nome\": \"string\",\r\n        \"situacao\": true\r\n      },\r\n      \"posicoesDasAssinaturasDoTipoDeDocumento\": [\r\n        {\r\n          \"id\": 0,\r\n          \"tipoDeLocalizacao\": \"Frente\",\r\n          \"tipoDePosicao\": \"Centralizado\",\r\n          \"aluno\": true\r\n        }\r\n      ],\r\n      \"utilizacoesDosDocumentos\": [\r\n        {\r\n          \"id\": 0,\r\n          \"nomeDoContexto\": \"string\",\r\n          \"descricao\": \"string\"\r\n        }\r\n      ],\r\n      \"utilizacoesDosDocumentosIds\": [\r\n        0\r\n      ]\r\n    }\r\n  ],\r\n  \"idsTiposDeDocumento\": [\r\n    0\r\n  ],\r\n  \"estaConfigurado\": true,\r\n  \"estadoDaMatriculaId\": 0,\r\n  \"finalidade\": \"Aluno\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n  \"id\": 45,\r\n  \"nome\": \"Não Cursar\",\r\n  \"situacao\": true,\r\n  \"tiposDeDocumento\": [\r\n    {\r\n      \"id\": 0,\r\n      \"descricao\": \"string\",\r\n      \"modeloDeFormulario\": true,\r\n      \"tipoDoNivelDeEscolaridade\": true,\r\n      \"tipoDeCpf\": true,\r\n      \"tipoDeRg\": true,\r\n      \"naoPermiteNumeroDoDocumento\": true,\r\n      \"grupo\": \"PessoaFisica\",\r\n      \"situacao\": true,\r\n      \"categoriaDoTipoDeDocumentoId\": 0,\r\n      \"categoriaDoTipoDeDocumento\": {\r\n        \"id\": 0,\r\n        \"nome\": \"string\",\r\n        \"situacao\": true\r\n      },\r\n      \"posicoesDasAssinaturasDoTipoDeDocumento\": [\r\n        {\r\n          \"id\": 0,\r\n          \"tipoDeLocalizacao\": \"Frente\",\r\n          \"tipoDePosicao\": \"Centralizado\",\r\n          \"aluno\": true\r\n        }\r\n      ],\r\n      \"utilizacoesDosDocumentos\": [\r\n        {\r\n          \"id\": 0,\r\n          \"nomeDoContexto\": \"string\",\r\n          \"descricao\": \"string\"\r\n        }\r\n      ],\r\n      \"utilizacoesDosDocumentosIds\": [\r\n        0\r\n      ]\r\n    }\r\n  ],\r\n  \"idsTiposDeDocumento\": [\r\n    0\r\n  ],\r\n  \"estaConfigurado\": true,\r\n  \"estadoDaMatriculaId\": 0,\r\n  \"finalidade\": \"Aluno\"\r\n}"
 						},
-						"url": {
-							"raw": "{{Servidor}}/admserver/api/Servico/AlterarSituacao",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"admserver",
-								"api",
-								"Servico",
-								"AlterarSituacao"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "Adicionar",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/admserver/api/Servico",
 						"method": "POST",
 						"header": [
 							{
@@ -1768,40 +1015,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 0,\r\n  \"nome\": \"Não Cursar 2\",\r\n  \"situacao\": true,\r\n  \"tiposDeDocumento\": [\r\n    {\r\n      \"id\": 0,\r\n      \"descricao\": \"string\",\r\n      \"modeloDeFormulario\": true,\r\n      \"tipoDoNivelDeEscolaridade\": true,\r\n      \"tipoDeCpf\": true,\r\n      \"tipoDeRg\": true,\r\n      \"naoPermiteNumeroDoDocumento\": true,\r\n      \"grupo\": \"PessoaFisica\",\r\n      \"situacao\": true,\r\n      \"categoriaDoTipoDeDocumentoId\": 0,\r\n      \"categoriaDoTipoDeDocumento\": {\r\n        \"id\": 0,\r\n        \"nome\": \"string\",\r\n        \"situacao\": true\r\n      },\r\n      \"posicoesDasAssinaturasDoTipoDeDocumento\": [\r\n        {\r\n          \"id\": 0,\r\n          \"tipoDeLocalizacao\": \"Frente\",\r\n          \"tipoDePosicao\": \"Centralizado\",\r\n          \"aluno\": true\r\n        }\r\n      ],\r\n      \"utilizacoesDosDocumentos\": [\r\n        {\r\n          \"id\": 0,\r\n          \"nomeDoContexto\": \"string\",\r\n          \"descricao\": \"string\"\r\n        }\r\n      ],\r\n      \"utilizacoesDosDocumentosIds\": [\r\n        0\r\n      ]\r\n    }\r\n  ],\r\n  \"idsTiposDeDocumento\": [\r\n    0\r\n  ],\r\n  \"estaConfigurado\": true,\r\n  \"estadoDaMatriculaId\": 0,\r\n  \"finalidade\": \"Aluno\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\r\n  \"id\": 0,\r\n  \"nome\": \"Não Cursar 2\",\r\n  \"situacao\": true,\r\n  \"tiposDeDocumento\": [\r\n    {\r\n      \"id\": 0,\r\n      \"descricao\": \"string\",\r\n      \"modeloDeFormulario\": true,\r\n      \"tipoDoNivelDeEscolaridade\": true,\r\n      \"tipoDeCpf\": true,\r\n      \"tipoDeRg\": true,\r\n      \"naoPermiteNumeroDoDocumento\": true,\r\n      \"grupo\": \"PessoaFisica\",\r\n      \"situacao\": true,\r\n      \"categoriaDoTipoDeDocumentoId\": 0,\r\n      \"categoriaDoTipoDeDocumento\": {\r\n        \"id\": 0,\r\n        \"nome\": \"string\",\r\n        \"situacao\": true\r\n      },\r\n      \"posicoesDasAssinaturasDoTipoDeDocumento\": [\r\n        {\r\n          \"id\": 0,\r\n          \"tipoDeLocalizacao\": \"Frente\",\r\n          \"tipoDePosicao\": \"Centralizado\",\r\n          \"aluno\": true\r\n        }\r\n      ],\r\n      \"utilizacoesDosDocumentos\": [\r\n        {\r\n          \"id\": 0,\r\n          \"nomeDoContexto\": \"string\",\r\n          \"descricao\": \"string\"\r\n        }\r\n      ],\r\n      \"utilizacoesDosDocumentosIds\": [\r\n        0\r\n      ]\r\n    }\r\n  ],\r\n  \"idsTiposDeDocumento\": [\r\n    0\r\n  ],\r\n  \"estaConfigurado\": true,\r\n  \"estadoDaMatriculaId\": 0,\r\n  \"finalidade\": \"Aluno\"\r\n}"
 						},
-						"url": {
-							"raw": "{{Servidor}}/admserver/api/Servico",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"admserver",
-								"api",
-								"Servico"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				},
 				{
 					"name": "deletar",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
+						"url": "{{Servidor}}/admserver/api/Servico/47",
 						"method": "DELETE",
 						"header": [
 							{
@@ -1812,25 +1035,9 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": ""
 						},
-						"url": {
-							"raw": "{{Servidor}}/admserver/api/Servico/47",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"admserver",
-								"api",
-								"Servico",
-								"47"
-							]
-						}
+						"description": ""
 					},
 					"response": []
 				}
