@@ -1396,6 +1396,205 @@
 			"name": "Modulo Plano de Curso",
 			"item": [
 				{
+					"name": "Plano DN",
+					"item": [
+						{
+							"name": "PCN",
+							"item": [
+								{
+									"name": "Não Desenvolve Competência",
+									"item": [
+										{
+											"name": "Cadastrar",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{Token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "{{Token}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"possuiDocumentoPadraoNacional\": null,\r\n  \"documentoUsoObrigatorio\": null,\r\n  \"regionalId\": 26,\r\n  \"validadoNacionalmente\": true,\r\n  \"ocupacaoCboIds\": [],\r\n  \"ocupacoesCbo\": [],\r\n  \"tituloId\": 1217,\r\n  \"situacao\": true,\r\n  \"desenvolveCompetencia\": \"0\",\r\n  \"indicadorComoFormaDeAvaliacao\": true,\r\n  \"frequenciaEParticipacaoComoFormaDeAvaliacao\": true,\r\n  \"liberarPlanoNacionalmente\": false,\r\n  \"usuarioDn\": true,\r\n  \"encerramentoPorOferta\": false,\r\n  \"permitirPublicarInternet\": false,\r\n  \"permitirDemanda\": false,\r\n  \"tipoDeCursoDoDn\": \"1\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Servidor}}/planocursoserver/api/AcaoEducacional",
+													"host": [
+														"{{Servidor}}"
+													],
+													"path": [
+														"planocursoserver",
+														"api",
+														"AcaoEducacional"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Informações Básicas",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{Token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "{{Token}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"id\": 0, //quando 0, irá criar uma nova aba, se passar o ID da informação básica, irá editar o conteúdo \r\n  \"planoDoCursoId\": 48568, // id do plano para vincular\r\n  \"justificativaEObjetivos\": \"<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\",\r\n  \"objetivoResumidoParaCliente\": \"<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\",\r\n  \"perfilProfissionalDeConclusao\": null,\r\n  \"orientacoesMetodologicas\": \"<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\",\r\n  \"aproveitamentoDeConhecimentoEDeExperiencias\": null,\r\n  \"avaliacao\": \"<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\",\r\n  \"estagioProfissionalSupervisionado\": null,\r\n  \"instalacaoEEquipamentosERecursosDidaticos\": \"<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\",\r\n  \"perfilDoPessoalDocenteETecnico\": \"<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\",\r\n  \"bibliografia\": null,\r\n  \"referencia\": \"<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\\n\",\r\n  \"estaCompleto\": false,\r\n  \"possuiTurmaCriada\": false,\r\n  \"informacoesParaVersoDeCertificados\": null,\r\n  \"aplicarAjustes\": false,\r\n  \"regionalId\": null\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Servidor}}/planocursoserver/api/InformacoesBasicasDaAcaoEducacional",
+													"host": [
+														"{{Servidor}}"
+													],
+													"path": [
+														"planocursoserver",
+														"api",
+														"InformacoesBasicasDaAcaoEducacional"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Requisitos",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{Token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "{{Token}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"planoDoCursoId\": 48568, // id do plano para vincular\r\n  \"descricao\": \"The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \\\"de Finibus Bonorum et Malorum\\\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.\",\r\n  \"requisitoIds\": [\r\n    2, //Idade mínima: 18 anos\r\n    1 // Idade maior ou igual a 16 anos.\r\n  ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Servidor}}/planocursoserver/api/requisitoDoPlanoDoCurso",
+													"host": [
+														"{{Servidor}}"
+													],
+													"path": [
+														"planocursoserver",
+														"api",
+														"requisitoDoPlanoDoCurso"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Organização Curricular",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{Token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "{{Token}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"ordensDto\": [\r\n    {\r\n      \"id\": 987,\r\n      \"situacao\": true,\r\n      \"nomeDaUnidadeCurricular\": \"Realizar exames radiológicos contrastados.\",\r\n      \"cargaHoraria\": 48,\r\n      \"cargaHorariaMaxima\": 48,\r\n      \"permiteCargaHorariaMinimaMaxima\": true,\r\n      \"dependencias\": [],\r\n      \"desenvolveCompetencia\": 0,\r\n      \"tipoDeNaturezaDiferenciadaId\": null,\r\n      \"unidadeCurricularId\": 987,\r\n      \"unidadeCurricularDoPlanoDoCursoId\": 0,\r\n      \"validadoNacionalmente\": true,\r\n      \"unidadesCurricularesAssociadas\": [],\r\n      \"ordem\": 1\r\n    },\r\n    {\r\n      \"id\": 990,\r\n      \"situacao\": true,\r\n      \"nomeDaUnidadeCurricular\": \"Prestar assistência inicial em situação de emergência.\",\r\n      \"cargaHoraria\": 36,\r\n      \"cargaHorariaMaxima\": 36,\r\n      \"permiteCargaHorariaMinimaMaxima\": true,\r\n      \"dependencias\": [],\r\n      \"desenvolveCompetencia\": 0,\r\n      \"tipoDeNaturezaDiferenciadaId\": null,\r\n      \"unidadeCurricularId\": 990,\r\n      \"unidadeCurricularDoPlanoDoCursoId\": 0,\r\n      \"validadoNacionalmente\": true,\r\n      \"unidadesCurricularesAssociadas\": [],\r\n      \"ordem\": 2\r\n    },\r\n    {\r\n      \"id\": 1017,\r\n      \"situacao\": true,\r\n      \"nomeDaUnidadeCurricular\": \"Abordagem para o influenciador digital\",\r\n      \"cargaHoraria\": 24,\r\n      \"cargaHorariaMaxima\": 24,\r\n      \"permiteCargaHorariaMinimaMaxima\": true,\r\n      \"dependencias\": [],\r\n      \"desenvolveCompetencia\": 0,\r\n      \"tipoDeNaturezaDiferenciadaId\": null,\r\n      \"unidadeCurricularId\": 1017,\r\n      \"unidadeCurricularDoPlanoDoCursoId\": 0,\r\n      \"validadoNacionalmente\": true,\r\n      \"unidadesCurricularesAssociadas\": [],\r\n      \"ordem\": 3\r\n    }\r\n  ],\r\n  \"planoDoCursoId\": 48568\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{Servidor}}/planocursoserver/api/organizacaocurriculardoplanodocurso",
+													"host": [
+														"{{Servidor}}"
+													],
+													"path": [
+														"planocursoserver",
+														"api",
+														"organizacaocurriculardoplanodocurso"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Desenvolve Competência",
+									"item": []
+								},
+								{
+									"name": "Ementa",
+									"item": []
+								}
+							]
+						}
+					]
+				},
+				{
 					"name": "Plano de Curso Id",
 					"request": {
 						"auth": {
