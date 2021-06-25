@@ -1852,45 +1852,19 @@
 				},
 				{
 					"name": "Utilizar Plano de Curso (Serviço Inativado)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{Token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"id\": 1512\r\n  \"planoDoCursoUtilizadoId\": 31910,\r\n  \"planoDoCursoUtilizado\": {\r\n    \"id\": 100,\r\n    \"estado\": \"EmElaboracao\",\r\n    \"situacao\": true,\r\n    \"planoDoCursoOriginalId\": 1512,\r\n    \"regionalId\": 1,\r\n    \"versao\": 9,\r\n    \"codigoDoPlano\": \"1512\",\r\n    \"codigoCentroDeCusto\": 0\r\n  },\r\n  \"planoDoCursoOriginalId\": 0,\r\n  \"planoDoCursoOriginal\": {\r\n    \"id\": 0,\r\n    \"estado\": \"EmElaboracao\",\r\n    \"situacao\": true,\r\n    \"planoDoCursoOriginalId\": 0,\r\n    \"regionalId\": 0,\r\n    \"versao\": 0,\r\n    \"codigoDoPlano\": \"1512\",\r\n    \"codigoCentroDeCusto\": 0\r\n  },\r\n  \"situacao\": true,\r\n  \"estadoDeValidadoDoDr\": \"EmElaboracao\",\r\n  \"regionalId\": 0,\r\n  \"encerramentoPorOferta\": true,\r\n  \"tipoDeCursoDoDn\": \"PlanoDeCursoNacional\",\r\n  \"tipoDeClassificacao\": \"Varejo\",\r\n  \"codigoCentroDeCusto\": 0,\r\n  \"acaoEducacional\": {\r\n    \"id\": 0,\r\n    \"planoDoCursoId\": 0,\r\n    \"tituloId\": 0,\r\n    \"situacao\": true,\r\n    \"regionalId\": 0\r\n  },\r\n  \"permitirPublicarInternet\": true,\r\n  \"permitirDemanda\": true\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Retornar Serviço Inválido\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Serviço inativado devido a descontinuação dos Planos Utilizados.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
 							}
-						},
-						"url": {
-							"raw": "{{Servidor}}/planocursoserver/api/UtilizarPlanoDoCurso/Utilizar",
-							"host": [
-								"{{Servidor}}"
-							],
-							"path": [
-								"planocursoserver",
-								"api",
-								"UtilizarPlanoDoCurso",
-								"Utilizar"
-							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Utilizar Plano de Curso (Serviço Inativado) Copy",
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1930,6 +1904,19 @@
 				},
 				{
 					"name": "Atualizar Utilização Do Plano de Curso (Serviço Inativado)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Retornar mensagem de serviço inativado\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Serviço inativado devido a descontinuação dos Planos Utilizados.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
