@@ -1175,7 +1175,7 @@
 					"response": []
 				},
 				{
-					"name": "Cadastrar Titulo DR - Enviar para Aprovação",
+					"name": "Aprovar Titulo DR - Logado como DN",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2757,6 +2757,120 @@
 									]
 								}
 							]
+						}
+					]
+				},
+				{
+					"name": "Plano DR - personalizado",
+					"item": [
+						{
+							"name": "PCN - Oferta única",
+							"item": [
+								{
+									"name": "Informações Básicas de Venda",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{Token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{Token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"id\": 0,\r\n  \"planoDoCursoId\": 48603,\r\n  \"termosECondicoesGerais\": \"<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\",\r\n  \"informacoesParaVendaOnline\": \"<p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>\\n\",\r\n  \"estaCompleto\": false,\r\n  \"regionalId\": null\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{Servidor}}/planocursoserver/api/InformacoesDeVendaDoPlanoDoCurso",
+											"host": [
+												"{{Servidor}}"
+											],
+											"path": [
+												"planocursoserver",
+												"api",
+												"InformacoesDeVendaDoPlanoDoCurso"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "PCR",
+							"item": []
+						},
+						{
+							"name": "Personalizar",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{Token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"planoDoCursoId\":48588}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Servidor}}/planocursoserver/api/AcaoEducacional/Personalizar",
+									"host": [
+										"{{Servidor}}"
+									],
+									"path": [
+										"planocursoserver",
+										"api",
+										"AcaoEducacional",
+										"Personalizar"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
